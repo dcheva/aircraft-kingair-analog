@@ -5,11 +5,7 @@ minor =0
 
 [GENERALENGINEDATA]
 engine_type =5
-; must be 346 @220kts
-; this is 713 @220kts (60% throttle)
-; fuel_flow_scalar =0.9 ; 1    ;1.05              ;JAYDEE 
-; set 346/713*0.9
-fuel_flow_scalar =0.3885
+fuel_flow_scalar =1    ;1.05              ;JAYDEE 
 min_throttle_limit =-0.15
 master_ignition_switch =0
 starter_type =0
@@ -197,8 +193,8 @@ min_n2_for_apu_bleed_air_cutoff=200
 n1_normal_tc=1          ;0.5
 n1_start_max_rate=1.7      ;1
 n1_start_combustion_max_rate=2
-idle_fuel_flow=150
-idle_high_fuel_flow=150
+idle_fuel_flow=165               ; JAYDEE           ;150
+idle_high_fuel_flow=165        ; JAYDEE             ;150
 min_n2_for_fuel_flow=15
 high_n1=100
 high_n2=100
@@ -228,12 +224,10 @@ thrust_scalar=1
 
 [TURBOPROP_ENGINE]
 engine_friction_table=-10.0:-0.20, 0.0:0.0, 10.0:0.50, 70.0:0.50, 105.0:0.50
-maximum_torque=3415
+maximum_torque=3415      ; JayDee            ;3450
 torque_automatic_limit=6000
-;tp_idle_range=0
-;tp_high_idle_throttle_pos=0
-tp_idle_range = 12.00 ; increase of n1 idle at high mixture (Percent)
-tp_high_idle_throttle_pos = 7; throttle position of high idle (Percent)
+tp_idle_range=0
+tp_high_idle_throttle_pos=0
 
 ;in order of updates
 ;n1_to_shaft_torque_table=0.00:0.00, 70.00:0.07, 100.00:1.03, 110.00:1.12
