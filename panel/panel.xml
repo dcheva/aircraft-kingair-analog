@@ -1,0 +1,239 @@
+<PlaneHTMLConfig>
+	
+	<Instrument>
+		<Name>GTN750</Name>
+		<ComIndex>1</ComIndex>
+		<NavIndex>1</NavIndex>
+		<Electric>
+			<Simvar name="CIRCUIT ON:103" unit="Boolean"/>
+		</Electric>
+	</Instrument>
+
+	<Instrument>
+		<Name>AS530_1</Name>
+		<ComIndex>1</ComIndex>
+		<NavIndex>1</NavIndex>
+		<NewCDIBehavior>True</NewCDIBehavior>
+		<DisableAPNavArm>True</DisableAPNavArm>
+		<SupportAPFlightDirector>True</SupportAPFlightDirector>
+		<Electric>
+			<Simvar name="CIRCUIT ON:103" unit="Boolean"/>
+		</Electric>
+	</Instrument>
+	
+	<Instrument>
+		<Name>AS530_2</Name>
+		<ComIndex>2</ComIndex>
+		<NavIndex>2</NavIndex>
+		<NewCDIBehavior>True</NewCDIBehavior>
+		<DisableAPNavArm>True</DisableAPNavArm>
+		<SupportAPFlightDirector>True</SupportAPFlightDirector>
+		<Electric>
+			<Simvar name="CIRCUIT ON:105" unit="Boolean"/>
+		</Electric>
+	</Instrument>
+
+	<!-- COM 1 -->
+	<Instrument>
+		<Name>CTL22_1</Name>
+		<Electric>
+			<Simvar name="CIRCUIT ON:103" unit="Boolean"/>
+		</Electric>
+	</Instrument>
+
+	<!-- COM 2 -->
+	<Instrument>
+		<Name>CTL22_2</Name>
+		<Electric>
+			<Simvar name="CIRCUIT ON:105" unit="Boolean"/>
+		</Electric>
+	</Instrument>
+
+	<!-- COM 2 -->
+	<Instrument>
+		<Name>CTL22_3</Name>
+		<Electric>
+			<Simvar name="CIRCUIT ON:107" unit="Boolean"/>
+		</Electric>
+	</Instrument>
+
+	<!-- NAV 1 -->
+	<Instrument>
+		<Name>CTL32_1</Name>
+		<Electric>
+			<Simvar name="CIRCUIT ON:104" unit="Boolean"/>
+		</Electric>
+	</Instrument>
+
+	<!-- NAV 2 -->
+	<Instrument>
+		<Name>CTL32_2</Name>
+		<Electric>
+			<Simvar name="CIRCUIT ON:106" unit="Boolean"/>
+		</Electric>
+	</Instrument>
+
+	<!-- RNAV -->
+	<Instrument>
+		<Name>KNS80_1</Name>
+		<Electric>
+			<Simvar name="CIRCUIT ON:108" unit="Boolean"/>
+		</Electric>
+		<NavSourceIndex>4</NavSourceIndex>
+	</Instrument>
+
+	<!-- ADF 1 -->
+	<Instrument>
+		<Name>CTL62_1</Name>
+		<Electric>
+			<Simvar name="CIRCUIT ON:129" unit="Boolean"/>
+		</Electric>
+	</Instrument>
+
+	<!-- ADF 2 -->
+	<Instrument>
+		<Name>CTL62_2</Name>
+		<Electric>
+			<Simvar name="CIRCUIT ON:130" unit="Boolean"/>
+		</Electric>
+	</Instrument>
+
+	<!-- XPNDR -->
+	<Instrument>
+		<Name>CTL92</Name>
+		<Electric>
+			<Simvar name="CIRCUIT ON:116" unit="Boolean"/>
+		</Electric>
+		<Transmitter1Circuit>116</Transmitter1Circuit>
+		<Transmitter2Circuit>117</Transmitter2Circuit>
+		<Encoder1Circuit>70</Encoder1Circuit>
+		<Encoder2Circuit>75</Encoder2Circuit>
+	</Instrument>
+
+	<Instrument>
+		<Name>DME42_1</Name>
+		<Electric>
+			<Simvar name="CIRCUIT ON:133" unit="Boolean"/>
+		</Electric>
+		<HoldSourceIndex>3</HoldSourceIndex>
+		<RnavRadioIndex>4</RnavRadioIndex>
+		<Dme3Circuit>171</Dme3Circuit>
+	</Instrument>
+
+	<Instrument>
+		<Name>DME42_2</Name>
+		<Electric>
+			<Simvar name="CIRCUIT ON:134" unit="Boolean"/>
+		</Electric>
+		<HoldSourceIndex>3</HoldSourceIndex>
+		<RnavRadioIndex>4</RnavRadioIndex>
+		<Dme3Circuit>171</Dme3Circuit>
+	</Instrument>
+
+	<Instrument>
+		<Name>bksq_wradar1</Name>
+		<Electric>
+			<Simvar name="CIRCUIT ON:131" unit="Boolean"/>
+		</Electric>
+	</Instrument>
+
+	<!-- PFD LCD's -->
+	<Instrument>
+		<Name>PFDLCD_1</Name>
+		<CIRCUIT_PFD>119</CIRCUIT_PFD>
+		<CIRCUIT_HSI>120</CIRCUIT_HSI>
+		<CIRCUIT_RADAR>112</CIRCUIT_RADAR>
+		<CIRCUIT_DME>133</CIRCUIT_DME>
+		<CIRCUIT_RNAV>108</CIRCUIT_RNAV>
+		<CIRCUIT_GPS>103</CIRCUIT_GPS>
+		<RnavRadioIndex>4</RnavRadioIndex>
+	</Instrument>
+
+	<VoicesAlerts>
+	    <Alert>
+	      <Type>SoundOnly</Type>
+	      <SoundEvent>tone_altitude_alert_default</SoundEvent>
+	      <Condition>
+	      	<And>
+	      	  <Simvar name="CIRCUIT ON:71" unit="Boolean"/>
+	          <StateMachine>
+	            <State id="Reset" value="0">
+	              <Transition to="Checking">
+	                <Or>
+	                  <And>
+	                    <GreaterEqual>
+	                      <Substract>
+	                        <Simvar name="AUTOPILOT ALTITUDE LOCK VAR" unit="feet"/>
+	                        <Simvar name="INDICATED ALTITUDE" unit="feet"/>
+	                      </Substract>
+	                      <Constant>1000</Constant>
+	                    </GreaterEqual>
+	                    <Not>
+	                      <Simvar name="AUTOPILOT ALTITUDE LOCK" unit="bool"/>
+	                    </Not>
+	                  </And>
+	                  <And>
+	                    <GreaterEqual>
+	                      <Substract>
+	                        <Simvar name="INDICATED ALTITUDE" unit="feet"/>
+	                        <Simvar name="AUTOPILOT ALTITUDE LOCK VAR" unit="feet"/>
+	                      </Substract>
+	                      <Constant>1000</Constant>
+	                    </GreaterEqual>
+	                    <Not>
+	                      <Simvar name="AUTOPILOT ALTITUDE LOCK" unit="bool"/>
+	                    </Not>
+	                  </And>
+	                </Or>
+	              </Transition>
+	            </State>
+	            <State id="Checking" value="0">
+	              <Transition to="Alerting">
+	                <Or>
+	                  <And>
+	                    <Greater>
+	                      <Substract>
+	                        <Simvar name="AUTOPILOT ALTITUDE LOCK VAR" unit="feet"/>
+	                        <Simvar name="INDICATED ALTITUDE" unit="feet"/>
+	                      </Substract>
+	                      <Constant>0</Constant>
+	                    </Greater>
+	                    <Lower>
+	                      <Substract>
+	                        <Simvar name="AUTOPILOT ALTITUDE LOCK VAR" unit="feet"/>
+	                        <Simvar name="INDICATED ALTITUDE" unit="feet"/>
+	                      </Substract>
+	                      <Constant>1000</Constant>
+	                    </Lower>
+	                  </And>
+	                  <And>
+	                    <GreaterEqual>
+	                      <Substract>
+	                        <Simvar name="INDICATED ALTITUDE" unit="feet"/>
+	                        <Simvar name="AUTOPILOT ALTITUDE LOCK VAR" unit="feet"/>
+	                      </Substract>
+	                      <Constant>0</Constant>
+	                    </GreaterEqual>
+	                    <Lower>
+	                      <Substract>
+	                        <Simvar name="INDICATED ALTITUDE" unit="feet"/>
+	                        <Simvar name="AUTOPILOT ALTITUDE LOCK VAR" unit="feet"/>
+	                      </Substract>
+	                      <Constant>1000</Constant>
+	                    </Lower>
+	                  </And>
+	                </Or>
+	              </Transition>
+	            </State>
+	            <State id="Alerting" value="1">
+	              <Transition to="Reset">
+	                <Constant>1</Constant>
+	              </Transition>
+	            </State>
+	          </StateMachine>
+	        </And>
+	      </Condition>
+	    </Alert>
+	</VoicesAlerts>
+
+</PlaneHTMLConfig>
